@@ -1,1 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hesmerci | Futuristic E-commerce Solutions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    l
+</head>
+<body>
+    <!-- Universe Canvas -->
+    <canvas id="universe"></canvas>
+    <div class="nebula-overlay"></div>
+    
+    <!-- Particle Cursor -->
+    <div class="cursor-follower"></div>
+    
+    <!-- Payment Modal -->
+    <div class="payment-modal" id="paymentModal">
+        <div class="payment-modal-content">
+            <button class="close-modal" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="section-title">Secure Payment</h2>
+            
+            <div class="payment-tabs">
+                <div class="payment-tab active" data-payment="crypto">
+                    <i class="fab fa-bitcoin"></i>
+                    Crypto Payment
+                </div>
+                <div class="payment-tab" data-payment="card">
+                    <i class="far fa-credit-card"></i>
+                    Card Payment
+                </div>
+                <div class="payment-tab" data-payment="paypal">
+                    <i class="fab fa-paypal"></i>
+                    PayPal
+                </div>
+                <div class="payment-tab" data-payment="bank">
+                    <i class="fas fa-university"></i>
+                    Bank Transfer
+                </div>
+            </div>
+            
+            <!-- Crypto Payment -->
+            <div class="payment-content active" id="crypto-payment">
+                <h3 class="payment-title">Crypto Payment</h3>
+                <div class="payment-form">
+                    <div class="payment-summary">
+                        <h5>Order Summary</h5>
+                        <div class="summary-item">
+                            <span>Service:</span>
+                            <span id="crypto-service">Shopify Development - Basic</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Amount:</span>
+                            <span id="crypto-amount">$299.00</span>
+                        </div>
+                        <div class="summary-total">
+                            <span>Total:</span>
+                            <span id="crypto-total">$299.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="crypto-address">
+                        <p>BTC Address:</p>
+                        <div class="crypto-address-code" id="btc-address">1P3GQHL7mojeftYBCzFMucfx5vzxvLdQyL</div>
+                        <button class="copy-btn" data-address="1P3GQHL7mojeftYBCzFMucfx5vzxvLdQyL">
+                            <i class="far fa-copy"></i> Copy Address
+                        </button>
+                    </div>
+                    
+                    <div class="crypto-address">
+                        <p>Ethereum (ERC20) Address:</p>
+                        <div class="crypto-address-code" id="eth-address">0x9101e85fcab3ba9fa8e6f704656af074b88a5422</div>
+                        <button class="copy-btn" data-address="0x9101e85fcab3ba9fa8e6f704656af074b88a5422">
+                            <i class="far fa-copy"></i> Copy Address
+                        </button>
+                    </div>
 
+                    <div class="crypto-address">
+                        <p>USDT (TRC20) Address:</p>
+                        <div class="crypto-address-code" id="usdt-address">TV23DfRXexPxYqWYGvtkfTmncm1vP9zH45</div>
+                        <button class="copy-btn" data-address="TV23DfRXexPxYqWYGvtkfTmncm1vP9zH45">
+                            <i class="far fa-copy"></i> Copy Address
+                        </button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Transaction Hash (After Payment)</label>
+                        <input type="text" class="form-control" placeholder="Enter your transaction hash">
+                    </div>
+                    
+                    <button class="btn-payment btn-crypto">
+                        <i class="fab fa-bitcoin"></i> Confirm Crypto Payment
+                    </button>
+                    
+                    <div class="security-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Secure Blockchain Transaction</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card Payment -->
+            <div class="payment-content" id="card-payment">
+                <h3 class="payment-title">Card Payment</h3>
+                <div class="payment-form">
+                    <div class="payment-summary">
+                        <h5>Order Summary</h5>
+                        <div class="summary-item">
+                            <span>Service:</span>
+                            <span id="card-service">Shopify Development - Basic</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Amount:</span>
+                            <span id="card-amount">$299.00</span>
+                        </div>
+                        <div class="summary-total">
+                            <span>Total:</span>
+                            <span id="card-total">$299.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Card Number</label>
+                        <input type="text" class="form-control" placeholder="1234 5678 9012 3456">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Expiry Date</label>
+                            <input type="text" class="form-control" placeholder="MM/YY">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">CVV</label>
+                            <input type="text" class="form-control" placeholder="123">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Cardholder Name</label>
+                        <input type="text" class="form-control" placeholder="John Doe">
+                    </div>
+                    
+                    <button class="btn-payment btn-card">
+                        <i class="far fa-credit-card"></i> Pay Securely
+                    </button>
+                    
+                    <div class="security-badge">
+                        <i class="fas fa-lock"></i>
+                        <span>256-bit SSL Encryption</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PayPal Payment -->
+            <div class="payment-content" id="paypal-payment">
+                <h3 class="payment-title">PayPal Payment</h3>
+                <div class="payment-form">
+                    <div class="payment-summary">
+                        <h5>Order Summary</h5>
+                        <div class="summary-item">
+                            <span>Service:</span>
+                            <span id="paypal-service">Shopify Development - Basic</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Amount:</span>
+                            <span id="paypal-amount">$299.00</span>
+                        </div>
+                        <div class="summary-total">
+                            <span>Total:</span>
+                            <span id="paypal-total">$299.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">PayPal Email</label>
+                        <input type="email" class="form-control" placeholder="your@email.com">
+                    </div>
+                    
+                    <button class="btn-payment btn-paypal">
+                        <i class="fab fa-paypal"></i> Pay with PayPal
+                    </button>
+                    
+                    <div class="security-badge">
+                        <i class="fas fa-user-shield"></i>
+                        <span>PayPal Buyer Protection</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bank Transfer -->
+            <div class="payment-content" id="bank-payment">
+                <h3 class="payment-title">Bank Transfer</h3>
+                <div class="payment-form">
+                    <div class="payment-summary">
+                        <h5>Order Summary</h5>
+                        <div class="summary-item">
+                            <span>Service:</span>
+                            <span id="bank-service">Shopify Development - Basic</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Amount:</span>
+                            <span id="bank-amount">$299.00</span>
+                        </div>
+                        <div class="summary-total">
+                            <span>Total:</span>
+                            <span id="bank-total">$299.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="crypto-address">
+                        <p>Bank Transfer Details:</p>
+                        <div class="crypto-address-code">
+                            Bank: Future Commerce Bank<br>
+                            Account Name: Hesmerci Solutions Inc.<br>
+                            Account Number: 9876543210<br>
+                            Routing Number: 123456789<br>
+                            SWIFT/BIC: FCBIUS33
+                        </div>
+                        <button class="copy-btn" data-address="Bank: Future Commerce Bank, Account: 9876543210, Routing: 123456789">
+                            <i class="far fa-copy"></i> Copy Details
+                        </button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Transaction Reference</label>
+                        <input type="text" class="form-control" placeholder="Enter your bank reference number">
+                    </div>
+                    
+                    <button class="btn-payment btn-bank">
+                        <i class="fas fa-university"></i> Confirm Bank Transfer
+                    </button>
+                    
+                    <div class="security-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>FDIC Insured Transactions</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="payment-security">
+                <div class="security-features">
+                    <div class="security-feature">
+                        <i class="fas fa-lock"></i>
+                        <span>256-bit Encryption</span>
+                    </div>
+                    <div class="security-feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>PCI DSS Compliant</span>
+                    </div>
+                    <div class="security-feature">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Fraud Protection</span>
+                    </div>
+                    <div class="security-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>SSL Secured</span>
+                    </div>
+                </div>
+                <div class="security-badge">
+                    <i class="fas fa-lock"></i>
+                    <span>Your payment is 100% secure</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">HESMERCI</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#portfolio">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#consulting">Consulting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="hero-title">DRIVEN BY INNOVATION. DEFINED BY RESULTS.</h1>
+                    <p class="hero-subtitle">Delivering smarter digital solutions that turn ideas into measurable success.</p>
+                    <div class="hero-btns">
+                        <a href="#pricing" class="btn btn-neon">View Pricing</a>
+                        <a href="#contact" class="btn btn-neon btn-neon-pink">Get In Touch</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 hero-image">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Futuristic E-commerce" class="hero-img">
+                    
+                    <div class="floating-card">
+                        <i class="fas fa-rocket fa-2x mb-2" style="color: var(--neon-blue);"></i>
+                        <h5>+245%</h5>
+                        <p>Revenue Growth</p>
+                    </div>
+                    
+                    <div class="floating-card">
+                        <i class="fas fa-chart-line fa-2x mb-2" style="color: var(--neon-pink);"></i>
+                        <h5>+180%</h5>
+                        <p>Traffic Increase</p>
+                    </div>
+                    
+                    <div class="floating-card">
+                        <i class="fas fa-shopping-cart fa-2x mb-2" style="color: var(--neon-purple);"></i>
+                        <h5>+320%</h5>
+                        <p>Conversion Rate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Hesmerci</h2>
+            <div class="about-content">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 mb-4 mb-lg-0">
+                        <div class="owner-image">
+                            <img src="hesmerci.png" alt="Muiz Adesina" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="col-lg-8 owner-details">
+                        <h3>Muiz Adesina - Founder & E-Commerce Growth Specialist</h3>
+                        <p>With nearly a decade of hands-on experience in the e-commerce industry, I’ve dedicated my career to redefining what’s possible in digital commerce. What began as a single Shopify store soon expanded into managing Etsy shops, TikTok storefronts, and strategic store promotions — all driven by a passion to create immersive, futuristic shopping experiences that inspire and convert.</p>
+                        <p>At Hesmerci, we combine intelligent automation, creative design, and data-powered strategies to transform ordinary online stores into extraordinary digital brands. Every solution we craft is built to enhance performance, boost customer engagement, and maximize profitability — redefining what it means to grow in the digital age.</p>
+                        <p>Our mission is simple: to empower brands with innovation that drives real impact. Every project is an opportunity to push boundaries, deliver measurable success, and shape the next evolution of global e-commerce.</p>
+                        
+                        <div class="stats">
+                            <div class="stat-item">
+                                <span class="stat-number">150+</span>
+                                <span class="stat-label">Projects Completed</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">98%</span>
+                                <span class="stat-label">Client Satisfaction</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">$15M+</span>
+                                <span class="stat-label">Revenue Generated</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">8</span>
+                                <span class="stat-label">Industry Awards</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3 class="service-title">Shopify Development</h3>
+                        <p>Our Shopify builds go beyond design — we create intelligent, data-backed stores that merge beauty with results, giving your brand a distinct digital edge.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fab fa-etsy"></i>
+                        </div>
+                        <h3 class="service-title">Etsy Optimization</h3>
+                        <p>We help you dominate Etsy with smart optimization, keyword-rich listings, and eye-catching visuals that boost traffic and sales effortlessly.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h3 class="service-title">Store Promotion</h3>
+                        <p>We don’t just promote — we create momentum. Through bold social campaigns, influencer collaborations, and precision-targeted ads, Hesmerci turns visibility into influence and influence into measurable growth.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 class="service-title">Web Design</h3>
+                        <p>We design the future of the web — sleek, responsive, and conversion-driven. Every Hesmerci website blends innovation with emotion, turning visitors into engaged customers and brands into unforgettable experiences.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-vr-cardboard"></i>
+                        </div>
+                        <h3 class="service-title">AR/VR Integration</h3>
+                        <p>We bring your store to life with immersive AR and VR experiences that redefine shopping. From virtual try-ons to interactive 3D showcases, Hesmerci turns every customer journey into a futuristic adventure — where they can see, feel, and believe before they buy.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3 class="service-title">AI Personalization</h3>
+                        <p>Intelligent product recommendations and personalized shopping journeys powered by advanced AI algorithms that learn from user behavior.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section">
+        <div class="container">
+            <h2 class="section-title">Pricing & Packages</h2>
+            
+            <div class="service-tabs">
+                <div class="service-tab active" data-service="shopify">Shopify Development</div>
+                <div class="service-tab" data-service="etsy">Etsy Optimization</div>
+                <div class="service-tab" data-service="promotion">Store Promotion</div>
+                <div class="service-tab" data-service="webdesign">Web Design</div>
+            </div>
+            
+            <!-- Shopify Pricing -->
+            <div class="pricing-content active" id="shopify-pricing">
+                <h3 class="service-title">Shopify Development Packages</h3>
+                <div class="pricing-cards">
+                    <!-- Basic Shopify -->
+                    <div class="pricing-card basic">
+                        <div class="pricing-header">
+                            <h4 class="plan-name">Basic</h4>
+                            <div class="plan-price">$299</div>
+                            <div class="plan-period">one-time setup</div>
+                        </div>
+                        <p class="plan-description">Perfect for startups and small businesses looking to establish their online presence</p>
+                        <ul class="features-list">
+                            <li>Custom Shopify Theme Development</li>
+                            <li>Up to 15 Product Listings</li>
+                            <li>Basic SEO Optimization</li>
+                            <li>Mobile-Responsive Design</li>
+                            <li>Payment Gateway Integration</li>
+                            <li>Social Media Integration</li>
+                            <li>Basic Analytics Setup</li>
+                            <li>Unlimited Revisions</li>
+                            <li class="excluded">Custom App Development</li>
+                            <li class="excluded">Advanced Inventory Management</li>
+                            <li class="excluded">Multi-currency Support</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <button class="btn-pricing btn-basic" data-plan="shopify-basic">Select Plan</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Standard Shopify -->
+                    <div class="pricing-card standard">
+                        <div class="pricing-header">
+                            <h4 class="plan-name">Standard</h4>
+                            <div class="plan-price">$799</div>
+                            <div class="plan-period">one-time setup</div>
+                        </div>
+                        <p class="plan-description">Ideal for growing businesses needing advanced features and customization</p>
+                        <ul class="features-list">
+                            <li>Everything in Basic</li>
+                            <li>Up to 50 Product Listings</li>
+                            <li>Advanced SEO Optimization</li>
+                            <li>Custom Functionality Development</li>
+                            <li>Advanced Analytics & Reporting</li>
+                            <li>Email Marketing Integration</li>
+                            <li>Inventory Management System</li>
+                            <li>Unlimited Revisions</li>
+                            <li>Basic Custom App Development</li>
+                            <li>Multi-currency Support</li>
+                            <li class="excluded">AI-Powered Recommendations</li>
+                            <li class="excluded">AR/VR Integration</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <button class="btn-pricing btn-standard" data-plan="shopify-standard">Select Plan</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Premium Shopify -->
+                    <div class="pricing-card premium">
+                        <div class="pricing-header">
+                            <h4 class="plan-name">Premium</h4>
+                            <div class="plan-price">$1,499</div>
+                            <div class="plan-period">one-time setup</div>
+                        </div>
+                        <p class="plan-description">Enterprise-level solution with cutting-edge features and unlimited customization</p>
+                        <ul class="features-list">
+                            <li>Everything in Standard</li>
+                            <li>100 Product Listings</li>
+                            <li>AI-Powered Personalization</li>
+                            <li>AR/VR Product Visualization</li>
+                            <li>Custom App Development</li>
+                            <li>Advanced Automation Systems</li>
+                            <li>Multi-language Support</li>
+                            <li>Unlimited Revisions</li>
+                            <li>Priority Support</li>
+                            <li>Advanced Security Features</li>
+                            <li>Blockchain Integration</li>
+                            <li>Dedicated Account Manager</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <button class="btn-pricing btn-premium" data-plan="shopify-premium">Select Plan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Etsy Pricing -->
+            <div class="pricing-content" id="etsy-pricing">
+                <h3 class="service-title">Etsy Optimization Packages</h3>
+                <div class="pricing-cards">
+                    <!-- Basic Etsy -->
+                    <div class="pricing-card basic">
+                        <div class="pricing-header">
+                            <h4 class="plan-name">Basic</h4>
+                            <div class="plan-price">$149</div>
+                            <div class="plan-period">per month</div>
+                        </div>
+                        <p class="plan-description">Essential optimization for new Etsy sellers or those looking to improve visibility</p>
+                        <ul class="features-list">
+                            <li>Comprehensive Shop Audit</li>
+                            <li>SEO Optimization for 10 Listings</li>
+                            <li>Keyword Research & Implementation</li>
+                            <li>Basic Banner & Logo Design</li>
+                            <li>Competitor Analysis</li>
+                            <li>Monthly Performance Report</li>
+                            <li>Basic Photography Guidance</li>
+                            <li>Email Support</li>
+                            <li class="excluded">Custom Graphic Design</li>
+                            <li class="excluded">Video Content Creation</li>
+                            <li class="excluded">Advertising Management</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <button class="btn-pricing btn-basic" data-plan="etsy-basic">Select Plan</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Standard Etsy -->
+                    <div class="pricing-card standard">
+                        <div class="pricing-header">
+                            <h4 class="plan-name">Standard</h4>
+                            <div class="plan-price">$499</div>
+                            <div class="plan-period">per month</div>
+                        </div>
+                        <p class="plan-description">Comprehensive optimization for established sellers wanting to scale</p>
+                        <ul class="features-list">
+                            <li>Everything in Basic</li>
+                            <li>SEO Optimization for 30 Listings</li>
+                            <li>Advanced Keyword Strategy</li>
+                            <li>Custom Banner & Graphics Package</li>
+                            <li>Product Photography Optimization</li>
+                            <li>Etsy Ads Management</li>
+                            <li>Competitor Monitoring</li>
+                            <li>Bi-weekly Strategy Calls</li>
+                            <li>Priority Support</li>
+                            <li class="excluded">Video Content Creation</li>
+                            <li class="excluded">Social Media Management</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <button class="btn-pricing btn-standard" data-plan="etsy-standard">Select Plan</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Premium Etsy -->
+                    <div class="pricing-card premium">
+                        <div class="pricing-header">
+                            <h4 class="plan-name">Premium</h4>
+                            <div class="plan-price">$999</div>
+                            <div class="plan-period">per month</div>
+                        </div>
+                        <p class="plan-description">Full-service management for high-volume sellers aiming for market dominance</p>
+                        <ul class="features-list">
+                            <li>Everything in Standard</li>
+                            <li>SEO Optimization for 50 Listing Optimization</li>
+                            <li>Custom Video Content Creation</li>
+                            <li>Advanced Etsy Ads Strategy</li>
+                            <li>Social Media Integration</li>
+                            <li>Custom Packaging Design</li>
+                            <li>Weekly Performance Analysis</li>
+                            <li>Dedicated Account Manager</li>
+                            <li>24/7 Priority Support</li>
+                            <li>Cross-platform Promotion</li>
+                            <li>Influencer Partnership Setup</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <button class="btn-pricing btn-premium" data-plan="etsy-premium">Select Plan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Store Promotion Pricing -->
+            <div class="pricing-content" id="promotion-pricing">
+                <h3 class="service-title">Store Promotion Packages</h3>
+                <div class="pricing-cards">
+                    <!-- Basic Promotion -->
+                    <div class="pricing-card basic">
+                        <div class="pricing-header">
+                            <h4 class="plan-name">Basic</h4>
+                            <div class="plan-price">$399</div>
+                            <div class="plan-period">per month</div>
+                        </div>
+                        <p class="plan-description">Essential promotion for new stores or seasonal campaigns</p>
+                        <ul class="features-list">
+                            <li>Social Media Strategy Development</li>
+                            <li>Content Creation for 2 Platforms</li>
+                            <li>Basic Facebook/Instagram Ads</li>
+                            <li>Monthly Performance Analytics</li>
+                            <li>Email Marketing Setup</li>
+                            <li>Basic Influencer Outreach</li>
+                            <li>Competitor Analysis</li>
+                            <li>Weekly Reporting</li>
+                            <li class="excluded">Google Ads Management</li>
+                            <li class="excluded">Video Content Creation</li>
+                            <li class="excluded">Advanced Analytics</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <button class="btn-pricing btn-basic" data-plan="promotion-basic">Select Plan</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Standard Promotion -->
+                    <div class="pricing-card standard">
+                        <div class="pricing-header">
+                            <h4 class="plan-name">Standard</h4>
+                            <div class="plan-price">$999</div>
+                            <div class="plan-period">per month</div>
+                        </div>
+                        <p class="plan-description">Comprehensive promotion for established brands looking to expand reach</p>
+                        <ul class="features-list">
+                            <li>Everything in Basic</li>
+                            <li>Multi-platform Content Strategy</li>
+                            <li>Advanced Facebook/Instagram Ads</li>
+                            <li>Google Ads Management</li>
+                            <li>Video Content Creation</li>
+                            <li>Influencer Campaign Management</li>
+                            <li>Advanced Analytics & Reporting</li>
+                            <li>A/B Testing Implementation</li>
+                            <li>Retargeting Campaigns</li>
+                            <li class="excluded">TikTok/YouTube Strategy</li>
+                            <li class="excluded">PR Outreach</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <button class="btn-pricing btn-standard" data-plan="promotion-standard">Select Plan</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Premium Promotion -->
+                    <div class="pricing-card premium">
+                        <div class="pricing-header">
+                            <h4 class="plan-name">Premium</h4>
+                            <div class="plan-price">$1,999</div>
+                            <div class="plan-period">per month</div>
+                        </div>
+                        <p class="plan-description">Enterprise-level promotion with full-service management and advanced strategies</p>
+                        <ul class="features-list">
+                            <li>Everything in Standard</li>
+                            <li>Full Funnel Marketing Strategy</li>
+                            <li>TikTok & YouTube Content Creation</li>
+                            <li>PR & Media Outreach</li>
+                            <li>Advanced Retargeting Systems</li>
+                            <li>Custom Landing Page Development</li>
+                            <li>Conversion Rate Optimization</li>
+                            <li>Competitive Intelligence Reports</li>
+                            <li>Dedicated Marketing Manager</li>
+                            <li>24/7 Campaign Monitoring</li>
+                            <li>AI-Powered Ad Optimization</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <button class="btn-pricing btn-premium" data-plan="promotion-premium">Select Plan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Web Design Pricing -->
+            <div class="pricing-content" id="webdesign-pricing">
+                <h3 class="service-title">Web Design Packages</h3>
+                <div class="pricing-cards">
+                    <!-- Basic Web Design -->
+                    <div class="pricing-card basic">
+                        <div class="pricing-header">
+                            <h4 class="plan-name">Basic</h4>
+                            <div class="plan-price">$499</div>
+                            <div class="plan-period">one-time setup</div>
+                        </div>
+                        <p class="plan-description">Perfect for small businesses needing a professional online presence</p>
+                        <ul class="features-list">
+                            <li>Custom Responsive Design</li>
+                            <li>Up to 5 Pages</li>
+                            <li>Basic SEO Setup</li>
+                            <li>Mobile-First Approach</li>
+                            <li>Contact Form Integration</li>
+                            <li>Social Media Integration</li>
+                            <li>Basic Analytics Setup</li>
+                            <li>Unlimited Revisions</li>
+                            <li class="excluded">E-commerce Functionality</li>
+                            <li class="excluded">Custom Animations</li>
+                            <li class="excluded">Advanced SEO</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <button class="btn-pricing btn-basic" data-plan="webdesign-basic">Select Plan</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Standard Web Design -->
+                    <div class="pricing-card standard">
+                        <div class="pricing-header">
+                            <h4 class="plan-name">Standard</h4>
+                            <div class="plan-price">$1,299</div>
+                            <div class="plan-period">one-time setup</div>
+                        </div>
+                        <p class="plan-description">Ideal for growing businesses needing advanced features and customization</p>
+                        <ul class="features-list">
+                            <li>Everything in Basic</li>
+                            <li>Up to 10 Pages</li>
+                            <li>Advanced SEO Optimization</li>
+                            <li>Custom Animations & Interactions</li>
+                            <li>Advanced Analytics & Reporting</li>
+                            <li>Blog Integration</li>
+                            <li>Content Management System</li>
+                            <li>Unlimited Revisions</li>
+                            <li>Basic E-commerce Setup</li>
+                            <li>Performance Optimization</li>
+                            <li class="excluded">Custom Web Applications</li>
+                            <li class="excluded">API Integrations</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <button class="btn-pricing btn-standard" data-plan="webdesign-standard">Select Plan</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Premium Web Design -->
+                    <div class="pricing-card premium">
+                        <div class="pricing-header">
+                            <h4 class="plan-name">Premium</h4>
+                            <div class="plan-price">$2,999</div>
+                            <div class="plan-period">one-time setup</div>
+                        </div>
+                        <p class="plan-description">Enterprise-level solution with cutting-edge features and unlimited customization</p>
+                        <ul class="features-list">
+                            <li>Everything in Standard</li>
+                            <li>Unlimited Pages</li>
+                            <li>AI-Powered Personalization</li>
+                            <li>Advanced Animations & Micro-interactions</li>
+                            <li>Custom Web Applications</li>
+                            <li>API Integrations</li>
+                            <li>Multi-language Support</li>
+                            <li>Unlimited Revisions</li>
+                            <li>Priority Support</li>
+                            <li>Advanced Security Features</li>
+                            <li>Performance Monitoring</li>
+                            <li>Dedicated Project Manager</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <button class="btn-pricing btn-premium" data-plan="webdesign-premium">Select Plan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="portfolio-grid">
+                 <div class="portfolio-item">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="Nomatic Store video - Made with Clipchamp.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="portfolio-overlay">
+                    <h4>Nomatic Store</h4>
+                    <p>Futuristic Shopify store with AR product visualization</p>
+                </div>
+            </div>
+                    <div class="portfolio-item">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="Shop Men's Clothes _ Latest Trends & Online Fashion _ ASOS - Google Chrome 2025-10-07 19-16-06.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="portfolio-overlay">
+                    <h4>Asos Store</h4>
+                    <p>AI-powered personalization for fashion e-commerce</p>
+                </div>
+            </div>
+             <div class="portfolio-item">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="furniture store - Made with Clipchamp.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="portfolio-overlay">
+                    <h4>Boconcept Store</h4>
+                    <p>VR showroom for furniture and home decor</p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Consulting Section -->
+    <section id="consulting" class="section">
+        <div class="container">
+            <div class="consulting-section">
+                <div class="consulting-content">
+                    <h2 class="consulting-title">E-commerce Evolution Consulting</h2>
+                    <p class="lead">Ready to take your e-commerce brand to the next level? At Hesmerci, we help you discover new opportunities, refine your strategy, and create a clear roadmap for lasting digital growth — all powered by innovation built for the future.</p>
+                    
+                    <div class="consulting-steps">
+                        <div class="consulting-step">
+                            <div class="step-number">1</div>
+                            <h4>Discovery</h4>
+                            <p>We dive deep into your current setup to uncover hidden opportunities and identify what’s holding your brand back.</p>
+                        </div>
+                        <div class="consulting-step">
+                            <div class="step-number">2</div>
+                            <h4>Strategy</h4>
+                            <p>We craft a personalized roadmap that aligns technology, creativity, and growth — guiding your e-commerce evolution step by step.</p>
+                        </div>
+                        <div class="consulting-step">
+                            <div class="step-number">3</div>
+                            <h4>Implementation</h4>
+                            <p>Our experts execute with precision, bringing your vision to life through advanced systems and next-gen digital solutions.</p>
+                        </div>
+                        <div class="consulting-step">
+                            <div class="step-number">4</div>
+                            <h4>Optimization</h4>
+                            <p>We continuously refine your store using real-time data and market insights to keep your brand ahead of trends — and the competition.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <a href="#contact" class="btn btn-neon btn-lg">Let’s make it happen</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" class="form-control" placeholder="Your Name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <input type="email" class="form-control" placeholder="Your Email" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <select class="form-control" required>
+                                        <option value="" disabled selected>Select Service</option>
+                                        <option value="shopify">Shopify Development</option>
+                                        <option value="etsy">Etsy Optimization</option>
+                                        <option value="promotion">Store Promotion</option>
+                                        <option value="webdesign">Web Design</option>
+                                        <option value="consulting">Consultation</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <select class="form-control" required>
+                                        <option value="" disabled selected>Select Package</option>
+                                        <option value="basic">Basic</option>
+                                        <option value="standard">Standard</option>
+                                        <option value="premium">Premium</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-neon btn-neon-pink">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mx-auto text-center">
+                    <h3 class="mb-4">HESMERCI</h3>
+                    <p>Redefining E-commerce with Futuristic Solutions</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="http://linkedin.com/in/hesmerci"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="@hesmerci_"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="https://www.instagram.com/hesmerci_?igsh=MWdpODJtOHcybXIxdA%3D%3D&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Hextech. All rights reserved. | Designed with <i class="fas fa-heart" style="color: var(--neon-pink);"></i> for the future of e-commerce</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="script.js">
+        </script>
+</body>
+</html>
