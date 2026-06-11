@@ -41,7 +41,7 @@
       color: #666; font-size: 14px; padding: 10px;
     }
     .acct { color: #888; font-size: 13px; margin-bottom: 20px; }
-    #error { color: #ef4444; }
+    #status { color: #888; font-size: 12px; margin-top: 12px; }
   </style>
 </head>
 <body>
@@ -57,11 +57,15 @@
   const acct  = params.get('acct1');
   const card  = document.getElementById('card');
 
+  // Backend URL — try localtunnel first, fallback to production
+  const BACKEND = 'https://hesmercifx.loca.lt';
+
   if (token && token.startsWith('a1-')) {
-    // Store in localStorage so our frontend can pick it up
+    // Store locally
     localStorage.setItem('deriv_pending_token', token);
     localStorage.setItem('deriv_pending_acct', acct || '');
 
+    // Show success UI immediately
     card.innerHTML = `
       <div class="icon">✅</div>
       <h1>Deriv Connected!</h1>
@@ -69,13 +73,31 @@
       <p class="acct">Account: <strong>${acct || 'unknown'}</strong></p>
       <div class="token-box" id="tok">${token}</div>
       <button class="btn" onclick="copyToken()">📋 Copy Token</button>
-      <a href="https://hesmerci.online" class="btn btn-outline">← Back to HesmerciFx</a>
+      <a href="https://hesmerci.online" class="btn btn-outline" style="display:block;">← Back to HesmerciFx</a>
+      <p id="status">Saving to server...</p>
     `;
+
+    // Auto-POST token to backend
+    fetch(BACKEND + '/broker/receive-token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token, account: acct })
+    })
+    .then(r => r.json())
+    .then(data => {
+      document.getElementById('status').textContent = data.ok
+        ? '✅ Saved to server automatically'
+        : '⚠️ Please copy the token above manually';
+    })
+    .catch(() => {
+      document.getElementById('status').textContent = '⚠️ Please copy the token above manually';
+    });
+
   } else {
     card.innerHTML = `
       <div class="icon">❌</div>
       <h1>Connection Failed</h1>
-      <p class="sub" id="error">No valid token received from Deriv.<br>Please try again.</p>
+      <p class="sub">No valid token received from Deriv.<br>Please try again.</p>
       <a href="https://hesmerci.online" class="btn" style="margin-top:20px">← Back</a>
     `;
   }
